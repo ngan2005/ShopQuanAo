@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" href="type.css">
+</head>
+<body>
+  <header>
+    <!-- Logo, menu, ... giống trang chủ -->
+  </header>
+  <main>
+    <h2>Giỏ hàng của bạn</h2>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Thành tiền</th>
+          <th>Xóa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sản phẩm sẽ được thêm bằng JavaScript -->
+      </tbody>
+    </table>
+    <div id="cart-total"></div>
+    <button onclick="checkout()">Thanh toán</button>
+  </main>
+  <script>
+    // Lấy giỏ hàng từ localStorage
+    let cart = JSON.parse(localStorage.getItem('cart160')) || [];
+    function renderCart() {
+      const tbody = document.querySelector('#cart-table tbody');
+      tbody.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, idx) => {
+        let price = parseInt(item.price);
+        let thanhTien = price * item.qty;
+        total += thanhTien;
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${item.img}" width="60"></td>
+            <td>${item.name}</td>
+            <td>${price.toLocaleString()}đ</td>
+            <td>
+              <button onclick="changeQty(${idx},-1)">-</button>
+              ${item.qty}
+              <button onclick="changeQty(${idx},1)">+</button>
+            </td>
+            <td>${thanhTien.toLocaleString()}đ</td>
+            <td><button onclick="removeItem(${idx})">Xóa</button></td>
+          </tr>
+        `;
+      });
+      document.getElementById('cart-total').textContent = 'Tổng cộng: ' + total.toLocaleString() + 'đ';
+    }
+    function changeQty(idx, delta) {
+      cart[idx].qty += delta;
+      if (cart[idx].qty < 1) cart[idx].qty = 1;
+      localStorage.setItem('cart160', JSON.stringify(cart));
+      renderCart();
+    }
+    function removeItem(idx) {
+      cart.splice(idx, 1);
+      localStorage.setItem('cart160', JSON.stringify(cart));
+      renderCart();
+    }
+    function checkout() {
+      alert('Đây là trang giả lập. Bạn có thể bổ sung trang thanh toán sau!');
+    }
+    renderCart();
+  </script>
+</body>
+</html>
