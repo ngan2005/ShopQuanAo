@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Túi Tote Denim Nam ICONDENIM VIỆT NAM TRONG TIM</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .product-page {
+      display: flex;
+      gap: 40px;
+      max-width: 1000px;
+    }
+
+    /* Cột trái: gallery */
+    .product-gallery {
+      width: 400px;
+    }
+
+    .main-image {
+      position: relative;
+    }
+
+    .main-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 22px;
+      padding: 8px 14px;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 0.8;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+    .arrow:hover { background: #ff5252; }
+
+    .thumbnails {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .thumbnails img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .thumbnails img.active {
+      border: 2px solid #ff5252;
+    }
+
+    /* Cột phải: thông tin sản phẩm */
+    .product-info {
+      flex: 1;
+    }
+
+    .price {
+      color: #ff5252;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .promo-box {
+        background: #111;
+        border: 1px dashed #555;  /* ← đây là khung gạch đứt */
+        padding: 15px;
+        border-radius: 5px;
+        color: #fff;
+        max-width: 400px;
+        border: 2px dashed rgb(172, 140, 81);
+    }
+    .product-desc {
+  background: #222;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+.size-info {
+  display: none; /* Ẩn ban đầu */
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #fffbe6;
+  border: 1px solid #e67e22;
+  border-radius: 8px;
+  color: #222;
+  font-size: 15px;
+  min-height: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.choose-size,
+.buy-now,
+.add-cart {
+  background: #649679;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-left: 10px;
+}
+.choose-size:hover,
+.buy-now:hover,
+.add-cart:hover {
+  background: #6ea786;
+}
+.size-options {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin: 18px 0 8px 0;
+}
+
+.size-options button {
+  padding: 10px 24px;
+  border: 2px solid #7dc79c;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.2s;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(39,174,96,0.08);
+}
+
+.size-options button:hover,
+.size-options button.selected {
+  background: #77a88b;
+  color: #fff;
+  border-color: #1e8449;
+}
+
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 18px 0;
+  background: #222;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: fit-content;
+}
+
+.qty-btn {
+  padding: 10px 18px;
+  background: #bec3c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.qty-btn:hover {
+  background: #88d0a6;
+}
+
+.quantity-box input[type="text"] {
+  width: 48px;
+  text-align: center;
+  margin: 0 8px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+  </style>
+</head>
+<body>
+    <div class="product-page">
+    <!-- Bên trái: ảnh -->
+    <div class="product-gallery">
+      <div class="main-image">
+        <button class="arrow left" onclick="prevImage()">❮</button>
+        <img id="mainImg" src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_mat_trai_tui_2a6dd417ff894f98b8946c4afdb8d9b0_1024x1024.jpg" alt="">
+        <button class="arrow right" onclick="nextImage()">❯</button>
+      </div>
+      <div class="thumbnails">
+        <img src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_can_tui_kem_986bf67ec54c484684532636484752ad_1024x1024.jpg" class="active" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/img_9927_b52159c8a7014d87adfa926306fdbfe2_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_bo_dien_thoai_vao_tui_5381539a368b48719fa59e3183344d26_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_can_khoa_gai_trang_f196f74787ef4bdf97aa43476c9b28e2_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_tui_den_11da3a0141b84b55beea27b9b0a2d2b5_1024x1024.jpg" onclick="changeImage(this)">
+      </div>
+    </div>
+    <!-- Bên phải: thông tin -->
+    <div class="product-info">
+      <h2>Túi Tote Nam ICONDEIM Canvas Disney Cheer Up
+        <h3>
+            Loại: Balo - Túi Xách<br>
+            MSP: TUID0061-01
+        </h3>
+      </h2>
+      <p class="price">679,000đ</p>
+      <p>
+        <div class="promo-box">
+            <h3>🎁 KHUYẾN MÃI - ƯU ĐÃI</h3>
+            <ul>
+            <li>🏷️ Nhập mã <b>SEP9</b> GIẢM 9k ĐƠN TỪ 0đ</li>
+            <li>🏷️ Nhập mã <b>SEP30</b> GIẢM 30K ĐƠN TỪ 299K</li>
+            <li>🏷️ Nhập mã <b>SEP50</b> GIẢM 50K ĐƠN TỪ 599K</li>
+            <li>🏷️ Nhập mã <b>SEP100</b> GIẢM 100K ĐƠN TỪ 999K</li>
+            <li>🚚 <span style="color:#00ff99"><b>FREESHIP</b></span> đơn từ 399K</li>
+            </ul>
+        </div>
+      </p>
+      <!-- Di chuyển phần chọn sản phẩm xuống đây -->
+      <div class="product-options">
+    <p><i><b>Mua riêng lẻ</b></i></p>
+    <div class="option-goup">
+      <img src="https://product.hstatic.net/1000253775/product/tui_nam_deo_cheo_icondenim_material_blending_2_tui_2fa9ad5246584b40ae3126d7db0a3b10_1024x1024.jpg" alt="Áo 1" width="20" onclick="selectOption(0)">
+    </div>
+    <div id="size-info-box" class="size-info"></div>
+
+    <div class="quantity-box">
+      <button class="qty-btn">−</button>
+      <input type="text" value="1">
+      <button class="qty-btn">+</button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="choose-size" id="chooseSizeBtn">VUI LÒNG CHỌN SIZE</button>
+      <button class="buy-now">MUA NGAY</button>
+      <button class="add-cart">THÊM VÀO GIỎ HÀNG</button>
+    </div>
+  </div>
+  <!-- Kết thúc phần chọn sản phẩm -->
+    </div>
+  </div>
+  
+  <script>
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  let currentIndex = thumbImgs.findIndex(img => img.classList.contains('active'));
+
+  function changeImage(element) {
+    document.getElementById("mainImg").src = element.src;
+    thumbImgs.forEach(img => img.classList.remove("active"));
+    element.classList.add("active");
+    currentIndex = thumbImgs.indexOf(element);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + thumbImgs.length) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function selectOption(index) {
+  // Đổi ảnh lớn bên trái
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  changeImage(thumbImgs[index]);
+
+  // Ẩn tất cả mô tả
+  document.querySelectorAll('.product-desc').forEach(desc => desc.style.display = 'none');
+  // Hiện mô tả sản phẩm được chọn
+  const desc = document.getElementById('product-desc-' + index);
+  if (desc) desc.style.display = 'block';
+}
+  </script>
+
+<div id="product-desc-0" class="product-desc" style="display:none;">
+  <h4>Áo 1: RUNPOW Airflow Mesh Jersey</h4>
+  <p>Mô tả chi tiết cho Áo 1...</p>
+</div>
+<div id="product-desc-1" class="product-desc" style="display:none;">
+  <h4>Áo 2: RUNPOW Airflow Mesh Jersey</h4>
+  <p>Mô tả chi tiết cho Áo 2...</p>
+</div>
+<!-- ...tương tự cho các sản phẩm khác... -->
+<script>
+  document.querySelectorAll('.size-options button').forEach(btn => {
+    btn.onclick = function() {
+      const infoBox = document.getElementById('size-info-box');
+      const chooseBtn = document.getElementById('chooseSizeBtn');
+      // Xóa hiệu ứng chọn ở các nút khác
+      document.querySelectorAll('.size-options button').forEach(b => b.classList.remove('selected'));
+      // Nếu đang hiện đúng gợi ý của nút này thì ẩn đi và reset nút chọn size
+      if (infoBox.textContent === btn.getAttribute('data-info')) {
+        infoBox.textContent = '';
+        infoBox.style.display = 'none';
+        chooseBtn.textContent = 'VUI LÒNG CHỌN SIZE';
+      } else {
+        infoBox.textContent = btn.getAttribute('data-info');
+        infoBox.style.display = 'inline-block';
+        chooseBtn.textContent = 'Đã chọn size ' + btn.textContent;
+        btn.classList.add('selected');
+      }
+    };
+  });
+</script>
+</body>
+</html>
