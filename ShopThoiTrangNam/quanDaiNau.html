@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="type.css">
+    <title>Quần Khaki Nam Dài Wash ICONDENIM ID</title>
+</head>
+<body>
+  
+    <div class="product-page">
+    <!-- Bên trái: ảnh -->
+    <div class="product-gallery">
+      <div class="main-image">
+        <button class="arrow left" onclick="prevImage()">❮</button>
+        <img id="mainImg" src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-7_aea992eed13243229319b4bd2f6f6d51_1024x1024.jpg" alt="">
+        <button class="arrow right" onclick="nextImage()">❯</button>
+      </div>
+      <div class="thumbnails">
+        <img src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-7_aea992eed13243229319b4bd2f6f6d51_1024x1024.jpg" class="active" onclick="changeImage(this)">
+        <img src="https://cdn.hstatic.net/products/1000253775/img_6664__1__b8b317e83dcb44a1a537542c6ed28f91_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-3_197936d7e02e48f7966f2b7bc1cea6be_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-1_e390d9c7f2264948a4fb3ceeee55b083_1024x1024.jpg" onclick="changeImage(this)">
+        <img src="https://cdn.hstatic.net/products/1000253775/short-lung-thang_regular_0d6de52410e940c9ae8a239156f367fe_1024x1024.png" onclick="changeImage(this)">
+      </div>
+    </div>
+    <!-- Bên phải: thông tin -->
+    <div class="product-info">
+      <h2>Quần Khaki Nam Dài Wash ICONDENIM ID
+        <h3>
+            Loại: Quần Kaki<br>
+            MSP: QKID0053-01
+        </h3>
+      </h2>
+      <p class="price">479,000đ</p>
+      <p>
+        <div class="promo-box">
+            <h3>🎁 KHUYẾN MÃI - ƯU ĐÃI</h3>
+            <ul>
+            <li>🏷️ Nhập mã <b>SEP9</b> GIẢM 9k ĐƠN TỪ 0đ</li>
+            <li>🏷️ Nhập mã <b>SEP30</b> GIẢM 30K ĐƠN TỪ 299K</li>
+            <li>🏷️ Nhập mã <b>SEP50</b> GIẢM 50K ĐƠN TỪ 599K</li>
+            <li>🏷️ Nhập mã <b>SEP100</b> GIẢM 100K ĐƠN TỪ 999K</li>
+            <li>🚚 <span style="color:#00ff99"><b>FREESHIP</b></span> đơn từ 399K</li>
+            </ul>
+        </div>
+      </p>
+      <!-- Di chuyển phần chọn sản phẩm xuống đây -->
+      <div class="product-options">
+    <p><i><b>Mua riêng lẻ</b></i></p>
+    <div class="option-goup">
+      <img src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-7_aea992eed13243229319b4bd2f6f6d51_1024x1024.jpg" alt="Áo 1" width="20" onclick="selectOption(0)">
+      <img src="https://cdn.hstatic.net/products/1000253775/img_6664__1__b8b317e83dcb44a1a537542c6ed28f91_1024x1024.jpg" alt="Áo 2" width="20" onclick="selectOption(1)">
+      <img src="https://cdn.hstatic.net/products/1000253775/160_kaki_053-3_197936d7e02e48f7966f2b7bc1cea6be_1024x1024.jpg" alt="Áo 3" width="20" onclick="selectOption(2)">
+    </div>
+    <p><b><i>Kích thước: </i></b><a href="#">📏 Hướng dẫn chọn size</a></p>
+    <div class="size-options">
+      <button data-info="Size: S | Cân nặng: 53-60kg | Eo: 74cm | Mông: 94cm | Dài quần: 46cm">S</button>
+      <button data-info="Size: M | Cân nặng: 60-67kg | Eo: 78cm | Mông: 98cm | Dài quần: 47cm">M</button>
+      <button data-info="Size: L | Cân nặng: 67-75kg | Eo: 82cm | Mông: 102cm | Dài quần: 48cm">L</button>
+      <button data-info="Size: XL | Cân nặng: 75-85kg | Eo: 86cm | Mông: 106cm | Dài quần: 49cm">XL</button>
+    </div>
+    <div id="size-info-box" class="size-info"></div>
+
+    <div class="quantity-box">
+      <button class="qty-btn">−</button>
+      <input type="text" value="1">
+      <button class="qty-btn">+</button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="choose-size" id="chooseSizeBtn">VUI LÒNG CHỌN SIZE</button>
+      <button class="buy-now">MUA NGAY</button>
+      <button class="add-cart">THÊM VÀO GIỎ HÀNG</button>
+    </div>
+  </div>
+  <!-- Kết thúc phần chọn sản phẩm -->
+    </div>
+  </div>
+  
+  <script>
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  let currentIndex = thumbImgs.findIndex(img => img.classList.contains('active'));
+
+  function changeImage(element) {
+    document.getElementById("mainImg").src = element.src;
+    thumbImgs.forEach(img => img.classList.remove("active"));
+    element.classList.add("active");
+    currentIndex = thumbImgs.indexOf(element);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + thumbImgs.length) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function selectOption(index) {
+  // Đổi ảnh lớn bên trái
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  changeImage(thumbImgs[index]);
+
+  // Ẩn tất cả mô tả
+  document.querySelectorAll('.product-desc').forEach(desc => desc.style.display = 'none');
+  // Hiện mô tả sản phẩm được chọn
+  const desc = document.getElementById('product-desc-' + index);
+  if (desc) desc.style.display = 'block';
+}
+  </script>
+<!-- ...tương tự cho các sản phẩm khác... -->
+<script>
+  document.querySelectorAll('.size-options button').forEach(btn => {
+    btn.onclick = function() {
+      const infoBox = document.getElementById('size-info-box');
+      const chooseBtn = document.getElementById('chooseSizeBtn');
+      // Xóa hiệu ứng chọn ở các nút khác
+      document.querySelectorAll('.size-options button').forEach(b => b.classList.remove('selected'));
+      // Nếu đang hiện đúng gợi ý của nút này thì ẩn đi và reset nút chọn size
+      if (infoBox.textContent === btn.getAttribute('data-info')) {
+        infoBox.textContent = '';
+        infoBox.style.display = 'none';
+        chooseBtn.textContent = 'VUI LÒNG CHỌN SIZE';
+      } else {
+        infoBox.textContent = btn.getAttribute('data-info');
+        infoBox.style.display = 'inline-block';
+        chooseBtn.textContent = 'Đã chọn size ' + btn.textContent;
+        btn.classList.add('selected');
+      }
+    };
+  });
+</script>
+</body>
+</html>

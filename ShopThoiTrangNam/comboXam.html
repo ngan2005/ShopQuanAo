@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="type.css">
+    <title>combo áo </title>
+</head>
+<body>
+  
+    <div class="product-page">
+    <!-- Bên trái: ảnh -->
+    <div class="product-gallery">
+      <div class="main-image">
+        <button class="arrow left" onclick="prevImage()">❮</button>
+        <img id="mainImg" src="https://file.hstatic.net/1000253775/file/01_a324338849ba4d819a8cb9cbc1ca07f3_master.jpg" alt="">
+        <button class="arrow right" onclick="nextImage()">❯</button>
+      </div>
+      <div class="thumbnails">
+        <img src="https://file.hstatic.net/1000253775/file/01_a324338849ba4d819a8cb9cbc1ca07f3_master.jpg" class="active" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/ao-khoac-jean-nam-icondenim-incredible_0025a11ad83b42c09a63923595d416d0_large.jpg" onclick="changeImage(this)">
+        <img src="https://product.hstatic.net/1000253775/product/160_tanktop_040-3_a1dc804d22824a059b1f1f893340d1b4_large.jpg" onclick="changeImage(this)">
+        <img src="https://cdn.hstatic.net/products/1000253775/video-quan-jean-icondenim-baggy-dirt-wash_88b1d656150e4c2e870feae98f0d3b8e_large.jpg" onclick="changeImage(this)">
+       
+      </div>
+    </div>
+    <!-- Bên phải: thông tin -->
+    <div class="product-info">
+      <h2>Áo Polo Nam ICONDENIM Shoulder Line
+        <h3>
+            Loại: Áo Polo<br>
+            MSP: PLID0237-01
+        </h3>
+      </h2>
+      <p class="price">379,000đ</p>
+      <p>
+        <div class="promo-box">
+            <h3>🎁 KHUYẾN MÃI - ƯU ĐÃI</h3>
+            <ul>
+            <li>🏷️ Nhập mã <b>SEP9</b> GIẢM 9k ĐƠN TỪ 0đ</li>
+            <li>🏷️ Nhập mã <b>SEP30</b> GIẢM 30K ĐƠN TỪ 299K</li>
+            <li>🏷️ Nhập mã <b>SEP50</b> GIẢM 50K ĐƠN TỪ 599K</li>
+            <li>🏷️ Nhập mã <b>SEP100</b> GIẢM 100K ĐƠN TỪ 999K</li>
+            <li>🚚 <span style="color:#00ff99"><b>FREESHIP</b></span> đơn từ 399K</li>
+            </ul>
+        </div>
+      </p>
+      <!-- Di chuyển phần chọn sản phẩm xuống đây -->
+      <div class="product-options">
+    <p><i><b>Mua riêng lẻ</b></i></p>
+    <div class="option-goup">
+      <img src="https://cdn.hstatic.net/products/1000253775/160_ao_polo_237-4_105c4710ac9e409fa1355164ce917963_1024x1024.jpg" alt="Áo 1" width="20" onclick="selectOption(0)">
+    </div>
+    <p><b><i>Kích thước áo: </i></b><a href="#">📏 Hướng dẫn chọn size</a></p>
+    <div class="size-options">
+      <button data-info="Size: S | Cân nặng: 53-60kg | Ngang vai: 30,5cm | Rộng ngực: 94cm | Dài áo: 67cm">S</button>
+      <button data-info="Size: M | Cân nặng: 60-67kg | Ngang vai: 32cm | Rộng ngực: 98cm | Dài áo: 69cm">M</button>
+      <button data-info="Size: L | Cân nặng: 67-75kg | Ngang vai: 33,5cm | Rộng ngực: 102cm | Dài áo: 71cm">L</button>
+      <button data-info="Size: XL | Cân nặng: 75-85kg | Ngang vai: 35cm | Rộng ngực: 106cm | Dài áo: 73cm">XL</button>
+    </div>
+    <p><b><i>Kích thước quần: </i></b><a href="#">📏 Hướng dẫn chọn size</a></p>
+     <div class="size-options">
+      <button data-info="Size: S | Cân nặng: 53-60kg | Eo: 74cm | Mông: 94cm | Dài quần: 46cm">S</button>
+      <button data-info="Size: M | Cân nặng: 60-67kg | Eo: 78cm | Mông: 98cm | Dài quần: 47cm">M</button>
+      <button data-info="Size: L | Cân nặng: 67-75kg | Eo: 82cm | Mông: 102cm | Dài quần: 48cm">L</button>
+      <button data-info="Size: XL | Cân nặng: 75-85kg | Eo: 86cm | Mông: 106cm | Dài quần: 49cm">XL</button>
+    </div>
+
+    <div id="size-info-box" class="size-info"></div>
+
+    <div class="quantity-box">
+      <button class="qty-btn">−</button>
+      <input type="text" value="1">
+      <button class="qty-btn">+</button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="choose-size" id="chooseSizeBtn">VUI LÒNG CHỌN SIZE</button>
+      <button class="buy-now">MUA NGAY</button>
+      <button class="add-cart">THÊM VÀO GIỎ HÀNG</button>
+    </div>
+  </div>
+  <!-- Kết thúc phần chọn sản phẩm -->
+    </div>
+  </div>
+  
+  <script>
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  let currentIndex = thumbImgs.findIndex(img => img.classList.contains('active'));
+
+  function changeImage(element) {
+    document.getElementById("mainImg").src = element.src;
+    thumbImgs.forEach(img => img.classList.remove("active"));
+    element.classList.add("active");
+    currentIndex = thumbImgs.indexOf(element);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + thumbImgs.length) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % thumbImgs.length;
+    changeImage(thumbImgs[currentIndex]);
+  }
+
+  function selectOption(index) {
+  // Đổi ảnh lớn bên trái
+  const thumbImgs = Array.from(document.querySelectorAll('.thumbnails img'));
+  changeImage(thumbImgs[index]);
+
+  // Ẩn tất cả mô tả
+  document.querySelectorAll('.product-desc').forEach(desc => desc.style.display = 'none');
+  // Hiện mô tả sản phẩm được chọn
+  const desc = document.getElementById('product-desc-' + index);
+  if (desc) desc.style.display = 'block';
+}
+  </script>
+
+<div id="product-desc-0" class="product-desc" style="display:none;">
+  <h4>Áo 1: RUNPOW Airflow Mesh Jersey</h4>
+  <p>Mô tả chi tiết cho Áo 1...</p>
+</div>
+<div id="product-desc-1" class="product-desc" style="display:none;">
+  <h4>Áo 2: RUNPOW Airflow Mesh Jersey</h4>
+  <p>Mô tả chi tiết cho Áo 2...</p>
+</div>
+<!-- ...tương tự cho các sản phẩm khác... -->
+<script>
+  document.querySelectorAll('.size-options button').forEach(btn => {
+    btn.onclick = function() {
+      const infoBox = document.getElementById('size-info-box');
+      const chooseBtn = document.getElementById('chooseSizeBtn');
+      // Xóa hiệu ứng chọn ở các nút khác
+      document.querySelectorAll('.size-options button').forEach(b => b.classList.remove('selected'));
+      // Nếu đang hiện đúng gợi ý của nút này thì ẩn đi và reset nút chọn size
+      if (infoBox.textContent === btn.getAttribute('data-info')) {
+        infoBox.textContent = '';
+        infoBox.style.display = 'none';
+        chooseBtn.textContent = 'VUI LÒNG CHỌN SIZE';
+      } else {
+        infoBox.textContent = btn.getAttribute('data-info');
+        infoBox.style.display = 'inline-block';
+        chooseBtn.textContent = 'Đã chọn size ' + btn.textContent;
+        btn.classList.add('selected');
+      }
+    };
+  });
+</script>
+</body>
+</html>
