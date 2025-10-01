@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style trangchu.css">
+    <link rel="icon" type="image" href="logo160s.jpg">
+    <title>Khách Hàng-160store </title>
+    </head>
+    
+    <body>
+ <div class="sidebar">
+    <div>
+      <div class="admin-info">
+        <img src="ảnh đại diện trang chủ..jpg" alt="Admin">
+        <h3>Trần Vũ Phương Thùy </h3>
+        <p>Quản trị viên</p>
+      </div>
+      <ul>
+        <li><a href="trangchu.html"><i class="home"></i> Trang chủ</a></li>
+        <li><a href="sanpham.html"><i class="box"></i> Sản phẩm</a></li>
+        <li><a href="Khachhang.html"><i class="users"></i> Khách hàng</a></li>
+        <li><a href="quanlinhansu.html"><i class="users"></i> Nhân sự</a></li>
+        <li><a href="thongke.html"><i class="chart-line"></i> Thống kê</a></li>
+        
+      </ul>
+    </div>
+    <div class="logout">
+      <a href="đăng nhập.html"><i class="power-off"></i> Đăng xuất</a>
+    </div>
+  </div>
+  <div class="khachhang-container">
+    
+     <h2><b>   Danh Sách Khách Hàng-160store </b></h2>
+
+    <table id="khachhang-table" border="1" cellspacing="0" cellpadding="8">
+      <tr>
+        <th>STT</th>
+        <th>Họ và tên</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Tuổi</th>
+        <th>Ngày sinh</th>
+        
+      </tr>
+    </table>
+  </div>
+<script>
+     // Hiển thị danh sách khách hàng khi mở trang
+    function loadKhachHang() {
+      let data = JSON.parse(localStorage.getItem("khachhang")) || [];
+      let table = document.getElementById("khachhang-table");
+
+      // Xóa hết bảng cũ (chỉ giữ lại header)
+      while (table.rows.length > 1) {
+        table.deleteRow(1);
+      }
+
+      // Thêm lại từng dòng
+      data.forEach((kh, index) => {
+        let row = table.insertRow(-1);
+        row.insertCell(0).innerText = index + 1;
+        row.insertCell(1).innerText = kh.fname + " " + kh.lname;
+        row.insertCell(2).innerText = kh.email;
+        row.insertCell(3).innerText = kh.phone;
+        row.insertCell(4).innerText = kh.age;
+        row.insertCell(5).innerText = kh.date;
+
+        // Nút Sửa và Xóa
+        row.insertCell(6).innerHTML = `
+          <button onclick="editKhach(${index})">Sửa</button>
+          <button onclick="deleteKhach(${index})">Xóa</button>
+        `;
+      });
+    }
+
+    // Xóa khách hàng
+    function deleteKhach(index) {
+      let data = JSON.parse(localStorage.getItem("khachhang")) || [];
+      data.splice(index, 1);
+      localStorage.setItem("khachhang", JSON.stringify(data));
+      loadKhachHang();
+    }
+
+    // Sửa khách hàng (lấy dữ liệu hiện ra prompt)
+    function editKhach(index) {
+      let data = JSON.parse(localStorage.getItem("khachhang")) || [];
+      let kh = data[index];
+
+      let fname = prompt("Firstname:", kh.fname);
+      let lname = prompt("Lastname:", kh.lname);
+      let email = prompt("Email:", kh.email);
+      let phone = prompt("Phone:", kh.phone);
+      let age = prompt("Age:", kh.age);
+      let date = prompt("Ngày sinh:", kh.date);
+
+      // Cập nhật lại
+      data[index] = { fname, lname, email, phone, age, date };
+      localStorage.setItem("khachhang", JSON.stringify(data));
+      loadKhachHang();
+    }
+
+    // Gọi khi mở trang
+    window.onload = loadKhachHang;
+  </script>
+</body>
+</html> 
+
+   
+       

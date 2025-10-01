@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Đăng Kí Tài Khoản - 160store</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image" href="logo160s.jpg">
+    </head>
+    <body>
+        <div class="login-container">
+            <h2>Đăng Kí Tài Khoản Mới 160store</h2>
+            <form>
+                <div>
+        <label for="fname">firstname:</label>
+        <input type="text" id="fname" name="fname" placeholder="nhập tên của bạn"> <br> 
+
+
+      </div>
+
+   <div>
+        <label for="lname">lastname:</label>
+        <input type="text" id="lname" name="lname" placeholder="nhập họ của bạn"> <br> 
+
+    </div>
+     <div>
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password" placeholder="nhập mật khẩu của bạn"> <br> 
+
+    </div>
+      <div>
+        <label for="email">email:</label>
+        <input type="email" id="email" name="email" placeholder="nhập email của bạn"> <br> 
+
+    </div>
+        <div>
+            <label for="phone">phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="nhập số điện thoại của bạn"> <br>
+
+             </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="nhập tuổi của bạn" min="1", max="100"> <br>
+</div>
+<div>
+            <label for="date">date:</label>
+            <input type="date" id="date" name="date" placeholder="nhập ngày sinh của bạn"> <br>
+</div><br>
+<!-- khách hàng khi điền thông tin đăng kí chọn khách hàng sẽ tự động đc thêm vào khachhang.html--> 
+  <select name="major">
+  <option value="Khách Hàng">Khách Hàng</option>
+  <option value="Nhân Sự">Nhân Sự</option>
+  </select>
+
+        
+<br>
+    </select>
+                <button type="submit">Đăng Kí</button>
+                <div class="actions">
+                    <a href="đăng nhập.html">Đã có tài khoản? Đăng nhập</a> <br>
+                    <a href="queenmk.html">Quên mật khẩu?</a>
+                </div>
+            </form>
+        </div>
+  <script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault(); // Ngăn form reload trang
+
+    // Lấy giá trị từ form
+    const fname = document.getElementById("fname").value.trim();
+const lname = document.getElementById("lname").value.trim();
+const password = document.getElementById("password").value.trim();
+const email = document.getElementById("email").value.trim();
+const phone = document.getElementById("phone").value.trim();
+const age = parseInt(document.getElementById("age").value, 10);
+const date = document.getElementById("date").value;
+const major = document.querySelector("select[name='major']").value;
+
+
+    // Kiểm tra dữ liệu bắt buộc
+    if (!fname || !lname || !password || !email || !phone || !age || !date || !major) {
+      alert("Vui lòng điền đầy đủ thông tin.");
+      return;
+    }
+
+    // Tạo đối tượng khách hàng
+    const user = { fname, lname, password, email, phone, age, date, major };
+
+    // Lấy danh sách khách hàng từ localStorage
+    let allUsers = JSON.parse(localStorage.getItem("khachhang")) || [];
+
+    // Kiểm tra email trùng
+    if (allUsers.some(u => u.email === email)) {
+      alert("Email đã tồn tại. Vui lòng dùng email khác.");
+      return;
+    }
+
+    // Thêm người dùng mới
+    allUsers.push(user);
+    localStorage.setItem("khachhang", JSON.stringify(allUsers));
+
+    alert("Đăng ký thành công!");
+
+    // Chuyển hướng theo vai trò
+    if (major === "Khách Hàng") {
+      window.location.href = "khachhang.html";
+    } else if (major === "Nhân Sự") {
+      window.location.href = "quanlinhansu.html";
+    } else {
+      window.location.href = "khachhang.html";
+    }
+  });
+</script>
+</body>
+
+</html> 
+
+
