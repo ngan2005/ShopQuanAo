@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Giỏ Hàng</title>
+  <link rel="icon" type="image/jpg" href="logo160s.jpg">
+  <link rel="stylesheet" href="style_qlnd.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="admin-info">
+        <img src="ảnh đại diện trang chủ..jpg" alt="Admin">
+        <h3>Quản trị viên</h3>
+      </div>
+      <nav>
+        <a href="QLND.HTML">👥 Quản lý người dùng</a>
+        <a href="GioHang.HTML" class="active">🛒 Giỏ hàng</a>
+        <a href="GioHangChiTiet.HTML">📦 Giỏ hàng chi tiết</a>
+      </nav>
+    </div>
+
+    <!-- Nội dung chính -->
+    <main class="content">
+      <h1>Quản Lý Giỏ Hàng</h1>
+
+      <div class="actions">
+        <button class="btn-add" id="btnAddCart">➕ Thêm giỏ hàng</button>
+        <div class="search">
+          <input type="search" id="searchCart" placeholder="Tìm kiếm giỏ hàng...">
+          <button id="btnSearchCart">🔍</button>
+        </div>
+      </div>
+
+      <div class="user-table">
+        <table id="cartTable">
+          <thead>
+            <tr>
+              <th>ID Giỏ</th>
+              <th>ID Người Dùng</th>
+              <th>Ngày Tạo</th>
+              <th>Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal thêm -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <h2>Thêm Giỏ Hàng</h2>
+      <input type="number" id="idND" placeholder="ID Người Dùng">
+      <div class="modal-buttons">
+        <button class="btn-save" id="saveCart">Lưu</button>
+        <button class="btn-cancel" id="cancelCart">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    let carts = JSON.parse(localStorage.getItem("carts")) || [];
+
+    const tableBody = document.querySelector("#cartTable tbody");
+    const modal = document.getElementById("cartModal");
+    const saveBtn = document.getElementById("saveCart");
+    const cancelBtn = document.getElementById("cancelCart");
+    const addBtn = document.getElementById("btnAddCart");
+    const searchInput = document.getElementById("searchCart");
+
+    function render(data) {
+      tableBody.innerHTML = "";
+      if (data.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Chưa có giỏ hàng nào</td></tr>`;
+        return;
+      }
+      data.forEach(c => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${c.id_GH}</td>
+          <td>${c.id_ND}</td>
+          <td>${c.ngay_Tao}</td>
+          <td>
+            <button class="btn-edit" onclick="viewDetail(${c.id_GH})">📦 Chi tiết</button>
+            <button class="btn-delete" onclick="deleteCart(${c.id_GH})">❌</button>
+          </td>`;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function deleteCart(id) {
+      if (confirm("Xóa giỏ hàng này?")) {
+        carts = carts.filter(c => c.id_GH !== id);
+        localStorage.setItem("carts", JSON.stringify(carts));
+        render(carts);
+      }
+    }
+
+    function viewDetail(id) {
+      localStorage.setItem("currentCart", id);
+      window.location.href = "GioHangChiTiet.HTML";
+    }
+
+    addBtn.onclick = () => {
+      modal.classList.add("active");
+      document.getElementById("idND").value = "";
+    };
+
+    cancelBtn.onclick = () => modal.classList.remove("active");
+
+    saveBtn.onclick = () => {
+      const idND = document.getElementById("idND").value.trim();
+      if (!idND) return alert("Nhập ID người dùng!");
+      const newCart = {
+        id_GH: carts.length ? Math.max(...carts.map(c => c.id_GH)) + 1 : 1,
+        id_ND: idND,
+        ngay_Tao: new Date().toLocaleString()
+      };
+      carts.push(newCart);
+      localStorage.setItem("carts", JSON.stringify(carts));
+      modal.classList.remove("active");
+      render(carts);
+    };
+
+    searchInput.addEventListener("input", e => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = carts.filter(c =>
+        c.id_ND.toString().includes(keyword) ||
+        c.id_GH.toString().includes(keyword)
+      );
+      render(filtered);
+    });
+
+    render(carts);
+  </script>
+</body>
+</html>
